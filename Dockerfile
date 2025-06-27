@@ -1,10 +1,8 @@
-# Use official Python image
 FROM python:3.10-slim
 
-# Set work directory
 WORKDIR /app
 
-# Install system dependencies (optional: add if needed for dlib or cv2)
+# Install OS-level dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -13,17 +11,14 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxrender-dev \
     ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install
 COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy entire project including model_files and checkpoints
 COPY . .
 
-# Expose the port FastAPI will use
-EXPOSE 8000
+EXPOSE 10000
 
-# Run the server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-10000}"]

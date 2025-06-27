@@ -17,3 +17,6 @@ pillow
 opencv-python-headless
 dlib
 pandas
+matplotlib
+python-multipart
+

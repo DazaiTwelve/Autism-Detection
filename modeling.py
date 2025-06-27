@@ -17,7 +17,7 @@ from torch.nn import CrossEntropyLoss, Dropout, Softmax, Linear, Conv2d, LayerNo
 from torch.nn.modules.utils import _pair
 from scipy import ndimage
 
-import model_files.configs as configs
+import model_files.config as configs
 
 from modeling_resnet import ResNetV2
 
